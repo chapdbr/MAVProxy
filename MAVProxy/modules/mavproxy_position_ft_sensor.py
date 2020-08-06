@@ -46,18 +46,21 @@ class position_ft_sensor_module(mp_module.MPModule):
 			fx = data[0]
 			fy = data[1]
 			fz = data[2]
-			fr = math.sqrt(fx**2 + fy**2 + fz**2)
+			x  = data[3]
+			y  = data[4]
+			z  = data[5]
+			#fr = math.sqrt(fx**2 + fy**2 + fz**2)
 			'''Calculate position'''
-			theta = math.atan2(fy, fx)
-			phi = math.acos(fz / fr)
-			x = self.radius * math.cos(theta) * math.sin(phi)
-			y = self.radius * math.sin(theta) * math.sin(phi)
-			z = self.radius * math.cos(phi)
+			#theta = math.atan2(fy, fx)
+			#phi = math.acos(fz / fr)
+			#x = self.radius * math.cos(theta) * math.sin(phi)
+			#y = self.radius * math.sin(theta) * math.sin(phi)
+			#z = self.radius * math.cos(phi)
 			'''Evaluate frequency'''
-			now = time.clock()
-			freq = 1 / (now - self.last_time)
-			self.last_time = now
-			print('freq:%s' % (freq))
+			#now = time.clock()
+			#freq = 1 / (now - self.last_time)
+			#self.last_time = now
+			#print('freq:%s' % (freq))
 			'''Send MAVLink message'''
 			try:
 				self.master.mav.vicon_position_estimate_send(time_us, x, y, z, fx, fy, fz, force_mavlink1=True)
