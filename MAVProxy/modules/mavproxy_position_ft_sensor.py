@@ -29,8 +29,8 @@ class position_ft_sensor_module(mp_module.MPModule):
 
 	def idle_task(self):
 		"""Called in idle time."""
+		# Try to read data from UDP socket
 		try:
-			# Receive data from UDP socket
 			datagram, addr = self.port.recvfrom(self.buffer_size)
 			data = json.loads(datagram)
 			now = time.time()
@@ -64,7 +64,7 @@ class position_ft_sensor_module(mp_module.MPModule):
 		self.port.bind((self.ip, self.portnum)) # bind new port
 		self.port.setblocking(0)
 		mavutil.set_close_on_exec(self.port.fileno())
-		print("Listening for GPS INPUT packets on UDP://%s:%s" % (self.ip, self.portnum))
+		print("Listening for INPUT packets on UDP://%s:%s" % (self.ip, self.portnum))
 
 def init(mpstate):
 	"""Initialise module."""
